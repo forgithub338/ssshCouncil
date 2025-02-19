@@ -6,8 +6,8 @@ export default function WebFooter() {
     return (
         <footer className="bg-gray-900">
             <div className="container mx-auto px-4 py-8 md:py-12">
-                <div className="grid grid-cols-1 md:grid-cols-10 gap-6">
-                    <div className="col-span-1 md:col-span-6 text-white space-y-2">
+                <div className="grid grid-cols-8 gap-2 md:grid-cols-10 md:gap-6">
+                    <div className="col-span-6 md:col-span-6 text-white space-y-2">
                         <p>台北市信義區基隆路一段156號</p>
                         <p>club_sslec@sssh.tp.edu.tw</p>
                         <div className="my-4"></div>
