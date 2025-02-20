@@ -45,7 +45,7 @@ export default function Navbar() {
                     <div className="flex items-center">
                         <div className="relative group">
                             <div className="flex items-center cursor-pointer">
-                                <a href="/about" className="text-white hover:text-orange-500 font-bold group-hover:text-orange-500">關於本會</a>
+                                <div className="text-white hover:text-orange-500 font-bold group-hover:text-orange-500">關於本會</div>
                                 <FontAwesomeIcon icon={faCaretDown} className="ml-2 w-4 h-4 text-white group-hover:text-orange-500"/>
                             </div>
                             <div className="absolute hidden group-hover:block top-full right-0 w-48 bg-gray-700 shadow-lg rounded-lg">
@@ -97,14 +97,14 @@ export default function Navbar() {
                             <div className="space-y-2">
                                 <div className="text-white font-bold">關於本會</div>
                                 <div className="pl-4 space-y-2">
-                                    <a href="/about" className="block text-white hover:text-orange-500 py-2">
-                                        議會組織架構
+                                    <a href="/faq" className="block text-white hover:text-orange-500 py-2">
+                                        學生議會搞甚麼?
                                     </a>
                                     <a href="/members" className="block text-white hover:text-orange-500 py-2">
-                                        議員介紹
+                                        議員成員
                                     </a>
-                                    <a href="/history" className="block text-white hover:text-orange-500 py-2">
-                                        歷屆議會
+                                    <a href="/join" className="block text-white hover:text-orange-500 py-2">
+                                        加入我們
                                     </a>
                                 </div>
                             </div>
