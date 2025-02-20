@@ -10,16 +10,16 @@ export default function Navbar() {
         <div className="bg-gray-800">
             {/* Desktop Navigation */}
             <div className="hidden md:grid grid-cols-10">
-                <div className="container mx-auto col-span-3 flexitems-center mt-2 mb-2 grid grid-cols-7">
+                <a href="/" className="container mx-auto col-span-3 flexitems-center mt-2 mb-2 grid grid-cols-7">
                     <div className="col-span-1">
-                        <a href="/" className="flex items-center">
+                        <div className="flex items-center">
                             <img src="/images/icon.png" alt="松山高中學生議會" className="w-[40px] h-[40px] ml-2" />
-                        </a>
+                        </div>
                     </div>
                     <div className="col-span-6 flex items-center justify-left">
                         <b className="font-bold text-2xl text-white">崧高學生議會</b>
                     </div>
-                </div>
+                </a>
 
                 <div className="container col-span-7 flex items-center justify-end space-x-10">
                     <div className="flex items-center">

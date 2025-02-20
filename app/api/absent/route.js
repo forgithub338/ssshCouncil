@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 // LINE Notify Token
-const LINE_NOTIFY_TOKEN = process.env.LINE_NOTIFY_TOKEN;
+const LINE_NOTIFY_TOKEN = process.env.LINE_NOTIFY_TOKEN_ABSENT;
 
 // 處理 OPTIONS 請求（預檢請求）
 export async function OPTIONS() {
