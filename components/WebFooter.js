@@ -25,7 +25,7 @@ export default function WebFooter() {
                     </div>
                     
                     <div className="col-span-1 md:col-span-2 space-y-4">
-                        <a href="https://www.instagram.com/sslec_11th/" target="_blank" className="block">
+                        <a href="https://www.instagram.com/sslec_12th/" target="_blank" className="block">
                             <FontAwesomeIcon icon={faInstagram} className="w-[50px] h-[50px] text-white hover:text-orange-500" />
                         </a>
                         <a href="https://www.youtube.com/channel/UCktJHl0q_kwCRxxcsdQ2CNg/community" target="_blank" className="block">
