@@ -111,6 +111,25 @@ export default function JoinForm() {
                 </div>
 
                 <div>
+                    <label className="block mb-2 font-semibold">想加入的部門：</label>
+                    <div className="space-y-2">
+                        {['秘書處', '議事處', '公報處'].map((role) => (
+                            <div key={role} className="flex items-center">
+                                <input
+                                    type="radio"
+                                    id={role}
+                                    name="preferredRole"
+                                    className="mr-2"
+                                    checked={formData.preferredRole === role}
+                                    onChange={(e) => setFormData({...formData, preferredRole: role})}
+                                />
+                                <label htmlFor={role}>{role}</label>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div>
                 <label className="block mb-2 font-semibold">是否有學生自治相關經驗？（可複選）</label>
                 <div className="space-y-2">
                     {[
