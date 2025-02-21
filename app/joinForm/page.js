@@ -168,6 +168,8 @@ export default function JoinForm() {
                                     updatedOrgs = [...formData.previousOrgs, '其他'];
                                 } else {
                                     updatedOrgs = formData.previousOrgs.filter(item => item !== '其他');
+                                    setFormData({...formData, previousOrgs: updatedOrgs, otherOrg: ''});
+                                    return;
                                 }
                                 setFormData({...formData, previousOrgs: updatedOrgs});
                             }}
@@ -179,7 +181,18 @@ export default function JoinForm() {
                                 className="ml-2 p-1 border rounded"
                                 placeholder="請輸入一項"
                                 value={formData.otherOrg || ''}
-                                onChange={(e) => setFormData({...formData, otherOrg: e.target.value})}
+                                onChange={(e) => {
+                                    const newValue = e.target.value;
+                                    const updatedOrgs = formData.previousOrgs.filter(item => item !== formData.otherOrg);
+                                    if (newValue) {
+                                        updatedOrgs.push(newValue);
+                                    }
+                                    setFormData({
+                                        ...formData,
+                                        otherOrg: newValue,
+                                        previousOrgs: updatedOrgs
+                                    });
+                                }}
                             />
                         )}
                     </div>

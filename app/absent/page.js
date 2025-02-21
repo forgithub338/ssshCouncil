@@ -4,7 +4,7 @@ import { useState } from 'react';
 export default function Absent() {
   const [formData, setFormData] = useState({
     name: '',
-    class: '101', // 預設值
+    class: '', // 預設值
     reason: '',
     date: '',
     deputy: '' // 新增代理人欄位
@@ -45,7 +45,7 @@ export default function Absent() {
         if (result.success) {
           alert('請假申請已送出！');
           setFormData({
-            class: '101',
+            class: '',
             name: '',
             reason: '',
             date: '',
@@ -80,6 +80,7 @@ export default function Absent() {
                 value={formData.class}
                 onChange={(e) => setFormData({...formData, class: e.target.value})}
               >
+                <option value="">請選擇班級</option>
                 {generateClassOptions().map((classNum) => (
                   <option key={classNum} value={classNum}>
                     {classNum}
