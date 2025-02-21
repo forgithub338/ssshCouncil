@@ -101,7 +101,7 @@ export default function Navbar() {
                                         學生議會搞甚麼?
                                     </a>
                                     <a href="/members" className="block text-white hover:text-orange-500 py-2">
-                                        議員成員
+                                        議會成員
                                     </a>
                                     <a href="/join" className="block text-white hover:text-orange-500 py-2">
                                         加入我們

@@ -53,16 +53,16 @@ export default async function MembersPage({ searchParams }) {
   };
 
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row">
       {/* 側邊欄 */}
-      <div className="w-48 min-h-screen bg-gray-100 p-4">
+      <div className="w-full md:w-48 bg-gray-100 p-4 sticky top-0 z-10 md:min-h-screen">
         <h2 className="text-xl font-semibold mb-4">選擇屆次</h2>
-        <div className="space-y-2">
+        <div className="flex md:block overflow-x-auto whitespace-nowrap pb-2 md:pb-0 md:space-y-2">
           {availableSessions.map((s) => (
             <a
               key={s}
               href={`/members?session=${s}`}
-              className={`block px-4 py-2 rounded ${
+              className={`inline-block md:block px-4 py-2 rounded mr-2 md:mr-0 ${
                 s === session
                   ? 'bg-gray-800 text-white'
                   : 'hover:bg-gray-200'
@@ -75,17 +75,17 @@ export default async function MembersPage({ searchParams }) {
       </div>
 
       {/* 主要內容區 */}
-      <div className="flex-1 container px-4 py-8">
+      <div className="flex-1 px-4 py-8">
         <h1 className="text-3xl font-bold mb-8">第{session}屆成員</h1>
         
         <section className="mb-12">
           <h2 className="text-2xl font-semibold mb-4">秘書處</h2>
           {Object.entries(secretaryPositions).map(([position, positionSecretaries]) => (
-            <div key={position} className="mb-8 bg-gradient-to-r from-gray-50 to-white rounded-lg p-6 shadow-sm">
-              <h3 className="text-xl font-semibold mb-4 inline-block bg-gray-800 text-white px-6 py-2 rounded-full w-full text-center">
+            <div key={position} className="mb-8 bg-gradient-to-r from-gray-50 to-white rounded-lg p-4 md:p-6 shadow-sm">
+              <h3 className="text-lg md:text-xl font-semibold mb-4 inline-block bg-gray-800 text-white px-4 md:px-6 py-2 rounded-full w-full text-center">
                 {position}
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 mt-4 md:mt-6">
                 {positionSecretaries.map((secretary, index) => (
                   <div 
                     key={index} 
