@@ -16,28 +16,28 @@ export default function Transparent() {
           category: "總彙編"
         },
         {
-          category: "學生議會",
+          category: "學生自治聯合會組織章程",
           items: [
             {
-              title: "臺北市立松山高級中學學生議會常務委員會組織規程",
-              link: "/docs/regulations/council/臺北市立松山高級中學學生議會常務委員會組織規程.pdf"
-            },
-            {
-              title: "臺北市立松山高級中學學生議會秘書處職權行使辦法",
-              link: "/docs/regulations/council/臺北市立松山高級中學學生議會秘書處職權行使辦法.pdf"
-            },
-            {
-              title: "臺北市立松山高級中學學生議會職權行使辦法",
-              link: "/docs/regulations/council/臺北市立松山高級中學學生議會職權行使辦法.pdf"
+              title: "臺北市立松山高級中學學生自治聯合會組織章程(舊)",
+              link: "/docs/regulations/independence/臺北市立松山高級中學學生自治聯合會組織章程.pdf"
             }
           ]
         },
         {
-          category: "學生自治條文",
+          category: "學生議會",
           items: [
             {
-              title: "臺北市立松山高級中學學生自治聯合會組織章程",
-              link: "/docs/regulations/independence/臺北市立松山高級中學學生自治聯合會組織章程.pdf"
+              title: "臺北市立松山高級中學學生議會常務委員會組織規程(舊)",
+              link: "/docs/regulations/council/臺北市立松山高級中學學生議會常務委員會組織規程.pdf"
+            },
+            {
+              title: "臺北市立松山高級中學學生議會秘書處職權行使辦法(舊)",
+              link: "/docs/regulations/council/臺北市立松山高級中學學生議會秘書處職權行使辦法.pdf"
+            },
+            {
+              title: "臺北市立松山高級中學學生議會職權行使辦法(舊)",
+              link: "/docs/regulations/council/臺北市立松山高級中學學生議會職權行使辦法.pdf"
             }
           ]
         },
@@ -45,15 +45,15 @@ export default function Transparent() {
           category: "學生會",
           items: [
             {
-              title: "臺北市立松山高級中學學生會正副主席選舉罷免辦法",
+              title: "臺北市立松山高級中學學生會正副主席選舉罷免辦法(舊)",
               link: "/docs/regulations/union/臺北市立松山高級中學學生會正副主席選舉罷免辦法.pdf"
             },
             {
-              title: "臺北市立松山高級中學學生自治聯合會學生會組織辦法",
+              title: "臺北市立松山高級中學學生自治聯合會學生會組織辦法(舊)",
               link: "/docs/regulations/union/臺北市立松山高級中學學生自治聯合會學生會組織辦法.pdf"
             },
             {
-              title: "臺北市立松山高級中學選務委員會設置要點",
+              title: "臺北市立松山高級中學選務委員會設置要點(舊)",
               link: "/docs/regulations/union/臺北市立松山高級中學選務委員會設置要點.pdf"
             }
           ]
@@ -62,7 +62,7 @@ export default function Transparent() {
           category: "其他",
           items: [
             {
-              title: "臺北市立松山高級中學學生自治聯合會校務會議代表遴選辦法",
+              title: "臺北市立松山高級中學學生自治聯合會校務會議代表遴選辦法(舊)",
               link: "/docs/regulations/other/臺北市立松山高級中學學生自治聯合會校務會議代表遴選辦法.pdf"
             }
           ]
