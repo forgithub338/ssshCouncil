@@ -47,7 +47,7 @@ export const metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code',
+    google: '9gPam-gQXMRM8Zv_qA8DO_OAz3EArrinbwK_NMfc0Lk',
   },
 }
 
@@ -55,6 +55,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="zh-TW">
       <head>
+        <meta name="google-site-verification" content="9gPam-gQXMRM8Zv_qA8DO_OAz3EArrinbwK_NMfc0Lk" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" />
