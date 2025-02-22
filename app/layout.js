@@ -60,7 +60,10 @@ export default function RootLayout({ children }) {
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={inter.className}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ClientWrapper />
         <Navbar />
         {children}
         <WebFooter />
