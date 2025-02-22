@@ -5,10 +5,20 @@ async function getSessionData(session) {
   const baseDir = path.join(process.cwd(), 'public/csvs', session);
   
   // Read and parse CSV files
+  const chairmanData = await fs.readFile(path.join(baseDir, 'chairman.csv'), 'utf-8');
   const congressmanData = await fs.readFile(path.join(baseDir, 'congressman.csv'), 'utf-8');
   const secretaryData = await fs.readFile(path.join(baseDir, 'secretary.csv'), 'utf-8');
   
   // Parse CSV data (skip headers)
+  const chairman = chairmanData
+    .split('\n')
+    .slice(1)
+    .filter(line => line.trim())
+    .map(line => {
+      const [classNum, name, id] = line.split(',');
+      return { classNum, name, id };
+    });
+
   const congressmen = congressmanData
     .split('\n')
     .slice(1)
@@ -31,19 +41,19 @@ async function getSessionData(session) {
   const secretaryPositions = {
     '秘書長': secretaries.filter(s => s.title === '秘書長'),
     '顧問秘書': secretaries.filter(s => s.title === '顧問秘書'),
-    '議事組秘書': secretaries.filter(s => s.title === '議事組秘書'),
-    '總務組秘書': secretaries.filter(s => s.title === '總務組秘書'),
-    '紀錄組秘書': secretaries.filter(s => s.title === '紀錄組秘書'),
-    '攝影組秘書': secretaries.filter(s => s.title === '攝影組秘書'),
+    '議事組秘書': secretaries.filter(s => s.title === '議事組'),
+    '總務組秘書': secretaries.filter(s => s.title === '總務組'),
+    '紀錄組秘書': secretaries.filter(s => s.title === '紀錄組'),
+    '攝影組秘書': secretaries.filter(s => s.title === '攝影組'),
   };
 
-  return { congressmen, secretaryPositions };
+  return { congressmen, secretaryPositions, chairman };
 }
 
 export default async function MembersPage({ searchParams }) {
   const availableSessions = ['12', '11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
   const session = searchParams.session || '12'; // Get session from URL params or default to '12'
-  const { congressmen, secretaryPositions } = await getSessionData(session);
+  const { congressmen, secretaryPositions, chairman } = await getSessionData(session);
 
   // Group congressmen by grade
   const congressmenByGrade = {
@@ -79,6 +89,19 @@ export default async function MembersPage({ searchParams }) {
         <h1 className="text-3xl font-bold mb-8">第{session}屆成員</h1>
         
         <section className="mb-12">
+          <h2 className="text-2xl font-semibold mb-4">議長</h2>
+          <div className="mb-8 bg-gradient-to-r from-gray-50 to-white rounded-lg p-4 md:p-6 shadow-sm">
+            <h3 className="text-lg md:text-xl font-semibold mb-4 inline-block bg-gray-800 text-white px-4 md:px-6 py-2 rounded-full w-full text-center">
+              議長
+            </h3>
+            <div className="border bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+              <h4 className="font-bold text-gray-800 bg-gray-100 inline-block px-3 py-1 rounded-full mb-2">
+                {chairman[0].classNum}班
+              </h4>
+              <p className="text-gray-700 mt-1">{chairman[0].name}</p>
+              {chairman[0].id && <p className="text-gray-500 text-sm mt-1">{chairman[0].id}</p>}
+            </div>
+          </div>
           <h2 className="text-2xl font-semibold mb-4">秘書處</h2>
           {Object.entries(secretaryPositions).map(([position, positionSecretaries]) => (
             <div key={position} className="mb-8 bg-gradient-to-r from-gray-50 to-white rounded-lg p-4 md:p-6 shadow-sm">
