@@ -2,7 +2,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import WebFooter from '@/components/WebFooter'
-
+import Absent from '@/components/Absent'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -60,10 +60,8 @@ export default function RootLayout({ children }) {
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ClientWrapper />
+      <body className={inter.className}>
+        <Absent />
         <Navbar />
         {children}
         <WebFooter />
