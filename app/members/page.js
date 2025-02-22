@@ -45,6 +45,11 @@ async function getSessionData(session) {
     '總務組秘書': secretaries.filter(s => s.title === '總務組'),
     '紀錄組秘書': secretaries.filter(s => s.title === '紀錄組'),
     '攝影組秘書': secretaries.filter(s => s.title === '攝影組'),
+    '網管組秘書': secretaries.filter(s => s.title === '網管組'),
+    '公報組秘書': secretaries.filter(s => s.title === '公報組'),
+    '公關組秘書': secretaries.filter(s => s.title === '公關組'),
+    '收發組秘書': secretaries.filter(s => s.title === '收發組'),
+    '出納組秘書': secretaries.filter(s => s.title === '出納組'),
   };
 
   return { congressmen, secretaryPositions, chairman };
