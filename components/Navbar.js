@@ -33,7 +33,7 @@ export default function Navbar() {
                         </a>
                     </div>
                     <div className="flex items-center">
-                        <a href="/new" className="flex items-center">
+                        <a href="/news" className="flex items-center">
                             <span className="text-white hover:text-orange-500 font-bold">議會新聞</span>
                         </a>
                     </div>
@@ -86,7 +86,7 @@ export default function Navbar() {
                             <a href="/absent" className="block text-white hover:text-orange-500 font-bold py-2">
                                 我要請假
                             </a>
-                            <a href="/new" className="block text-white hover:text-orange-500 font-bold py-2">
+                            <a href="/news" className="block text-white hover:text-orange-500 font-bold py-2">
                                 議會新聞
                             </a>
                             <a href="/transparent" className="block text-white hover:text-orange-500 font-bold py-2">
