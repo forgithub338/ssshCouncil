@@ -1260,7 +1260,7 @@ export default function Transparent() {
           </div>
           <div className="my-6">
             <h2 className="text-xl font-bold text-gray-900 mb-6">開會紀錄</h2>
-            <div className="space-y-2">
+        <div className="space-y-2">
               {Object.entries(open_documents).map(([key, section]) => (
                 <button
                   key={key}

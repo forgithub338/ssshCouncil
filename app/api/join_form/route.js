@@ -1,55 +1,77 @@
 import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
-export async function POST(request) {
+export async function POST(req) {
   try {
-    const data = await request.json();
+    const formData = await req.json();
     
-    // 組織 Line 訊息
-    const message = `
-📝 新加入申請！
-
-👤 基本資料
-姓名：${data.name}
-學號：${data.studentId}
-班級座號：${data.grade}
-Line ID：${data.lineId}
-
-🎯 申請資訊
-想加入的部門：${data.preferredRole}
-曾加入組織：${data.previousOrgs.join('、')}
-社團幹部經驗：${data.leadershipExp}
-${data.leadershipExp === "有" ? `擔任職位：${data.leadershipPosition}` : ''}
-想嘗試的內容：
-${data.interests.join('\n')}
-
-💭 加入動機：
-${data.motivation}
-    `.trim();
-
-    // 發送到 Line Notify
-    const lineNotifyToken = process.env.LINE_NOTIFY_TOKEN_JOIN;
+    //基本資訊
+    const grade = formData.grade;
+    const name = formData.name;
+    const studentId = formData.studentId;
+    const lineId = formData.lineId;
     
-    const response = await fetch('https://notify-api.line.me/api/notify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Bearer ${lineNotifyToken}`,
+    //經歷
+    const leadershipExp = formData.leadershipExp;
+    const leadershipPosition = formData.leadershipPosition;
+    const previousOrgs = formData.previousOrgs;
+
+    //目標工作
+    const preferredRole = formData.preferredRole;
+    const interests = formData.interests;
+
+    //動機
+    const motivation = formData.motivation;
+
+
+    const htmlMessage = `
+      <p>【秘書申請】 📝 新加入申請！</p>
+
+      <p>👤 基本資料</p>
+      <p>姓名：${name}</p>
+      <p>學號：${studentId}</p>
+      <p>班級座號：${grade}</p>
+      <p>Line ID： ${lineId}</p>
+
+      <br/>
+      <p>🎯 申請資訊</p>
+      <p>想加入的部門：${preferredRole}</p>
+      <p>曾加入組織：${previousOrgs.filter(org => org !== '其他').map(org => `<span>${org}</span>`).join('、')}</p>
+      <p>社團幹部經驗：${leadershipExp ? `<span>${leadershipPosition}</span>` : '無'}</p>
+
+      <br/>
+      <p>想嘗試的內容：</p>
+      ${interests.map(interest => `<p>${interest}</p>`).join('')}
+
+      <br/>
+      <p>💭 加入動機：</p>
+      <p>${motivation}</p>
+    `
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "11130023@sssh.tp.edu.tw",
+        pass: process.env.GMAIL_APPLICATION_PASSWORD,
       },
-      body: new URLSearchParams({
-        message: message,
-      }),
     });
 
-    if (!response.ok) {
-      throw new Error('Line Notify 發送失敗');
+    try {
+      await transporter.sendMail({
+        from: "11130023@sssh.tp.edu.tw",
+        to: "club_sslec@sssh.tp.edu.tw",
+        subject: "秘書申請",
+        html: htmlMessage,
+      });
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
     }
 
-    return NextResponse.json({ success: true, message: '表單提交成功！我們會盡快與您聯繫。' });
+    return NextResponse.json({ success: true });
+
   } catch (error) {
-    console.error('Error:', error);
-    return NextResponse.json(
-      { success: false, message: '提交失敗，請稍後再試。' },
-      { status: 500 }
-    );
+    console.error('Error parsing form data:', error);
+    return NextResponse.json({ error: 'Failed to parse form data' }, { status: 500 });
   }
 }

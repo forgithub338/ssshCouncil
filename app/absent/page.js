@@ -28,10 +28,11 @@ export default function Absent() {
     return options;
   };
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     
     try {
+      console.log(formData)
       const response = await fetch('/api/absent', {
         method: 'POST',
         headers: {
@@ -39,9 +40,12 @@ export default function Absent() {
         },
         body: JSON.stringify(formData),
       });
-
+      
       if (response.ok) {
         const result = await response.json();
+
+        console.log(result)
+
         if (result.success) {
           alert('請假申請已送出！');
           setFormData({

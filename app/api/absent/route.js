@@ -1,73 +1,48 @@
 import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
-// LINE Notify Token
-const LINE_NOTIFY_TOKEN = process.env.LINE_NOTIFY_TOKEN_ABSENT;
-
-// 處理 OPTIONS 請求（預檢請求）
-export async function OPTIONS() {
-  return NextResponse.json(
-    {},
-    {
-      status: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      },
-    }
-  );
-}
-
-// 處理 POST 請求
 export async function POST(req) {
   try {
-    const data = await req.json();
-    
-    // 格式化請假訊息
-    const message = `
-📝 議員請假通知
-班級：${data.class}
-姓名：${data.name}
-日期：${data.date}
-代理人：${data.deputy}
-原因：${data.reason}
-    `.trim();
+    const formData = await req.json();
 
-    // 發送到 LINE Notify
-    const response = await fetch('https://notify-api.line.me/api/notify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Bearer ${LINE_NOTIFY_TOKEN}`,
+    const group = formData.class;
+    const name = formData.name;
+    const reason = formData.reason;
+    const date = formData.date;
+    const deputy = formData.deputy;
+
+    const htmlMessage = `
+      <p>【議員請假】 📝 議員請假通知 </p>
+      <p>班級：${group}</p>
+      <p>姓名：${name}</p>
+      <p>日期：${date}</p>
+      <p>代理人：${deputy}</p>
+      <p>原因：${reason}</p>
+    `
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "11130023@sssh.tp.edu.tw",
+        pass: process.env.GMAIL_APPLICATION_PASSWORD,
       },
-      body: new URLSearchParams({
-        message: message,
-      }),
     });
 
-    if (!response.ok) {
-      throw new Error('LINE Notify request failed');
+    try {
+      await transporter.sendMail({
+        from: "11130023@sssh.tp.edu.tw",
+        to: "club_sslec@sssh.tp.edu.tw",
+        subject: "議員請假通知",
+        html: htmlMessage,
+      });
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
     }
-
-    return NextResponse.json(
-      { success: true },
-      {
-        status: 200,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-      }
-    );
+    
+    return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error sending LINE notification:', error);
-    return NextResponse.json(
-      { error: 'Failed to send notification' },
-      { 
-        status: 500,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-      }
-    );
+    console.error('Error parsing form data:', error);
+    return NextResponse.json({ error: 'Failed to parse form data' }, { status: 500 });
   }
 }

@@ -30,9 +30,16 @@ export default function JoinForm() {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+      console.log(data)
+
       if (!response.ok) throw new Error('提交失敗');
 
+      
+
       alert('表單提交成功！我們會盡快與您聯繫。');
+
+
       setFormData({
         name: '',
         studentId: '',
