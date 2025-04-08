@@ -24,49 +24,59 @@ export async function POST(req) {
     const motivation = formData.motivation;
 
 
-    const htmlMessage = `
-      <p>【秘書申請】 📝 新加入申請！</p>
+    const htmlMessage = `【秘書申請】 📝 新加入申請！
 
-      <p>👤 基本資料</p>
-      <p>姓名：${name}</p>
-      <p>學號：${studentId}</p>
-      <p>班級座號：${grade}</p>
-      <p>Line ID： ${lineId}</p>
+👤 基本資料
+姓名：${name}
+學號：${studentId}
+班級座號：${grade}
+Line ID： ${lineId}
 
-      <br/>
-      <p>🎯 申請資訊</p>
-      <p>想加入的部門：${preferredRole}</p>
-      <p>曾加入組織：${previousOrgs.filter(org => org !== '其他').map(org => `<span>${org}</span>`).join('、')}</p>
-      <p>社團幹部經驗：${leadershipExp ? `<span>${leadershipPosition}</span>` : '無'}</p>
+🎯 申請資訊
+想加入的部門：${preferredRole}
+曾加入組織：${previousOrgs.filter(org => org !== '其他').map(org => `${org}`).join('、')}
+社團幹部經驗：${leadershipExp === "有" ? `${leadershipPosition}` : '無'}
 
-      <br/>
-      <p>想嘗試的內容：</p>
-      ${interests.map(interest => `<p>${interest}</p>`).join('')}
+想嘗試的內容：
+${interests.map(interest => `${interest}`).join('')}
 
-      <br/>
-      <p>💭 加入動機：</p>
-      <p>${motivation}</p>
-    `
+💭 加入動機：
+${motivation}`
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "11130023@sssh.tp.edu.tw",
-        pass: process.env.GMAIL_APPLICATION_PASSWORD,
+    // const transporter = nodemailer.createTransport({
+    //   service: "gmail",
+    //   auth: {
+    //     user: "11130023@sssh.tp.edu.tw",
+    //     pass: process.env.GMAIL_APPLICATION_PASSWORD,
+    //   },
+    // });
+
+    // try {
+    //   await transporter.sendMail({
+    //     from: "11130023@sssh.tp.edu.tw",
+    //     to: "club_sslec@sssh.tp.edu.tw",
+    //     subject: "秘書申請",
+    //     html: htmlMessage,
+    //   });
+    // } catch (error) {
+    //   console.error('Failed to send email:', error);
+    //   return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+    // }
+
+    const response = await fetch('https://api.line.me/v2/bot/message/push', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.LINE_ACCESS_TOKEN}`
       },
-    });
-
-    try {
-      await transporter.sendMail({
-        from: "11130023@sssh.tp.edu.tw",
-        to: "club_sslec@sssh.tp.edu.tw",
-        subject: "秘書申請",
-        html: htmlMessage,
-      });
-    } catch (error) {
-      console.error('Failed to send email:', error);
-      return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
-    }
+      body: JSON.stringify({
+        to: "C95df04c09e6e31025553358db92a4056",
+        messages: [{
+          type: 'text',
+          text: `${htmlMessage}`
+        }]
+      })
+    })
 
     return NextResponse.json({ success: true });
 
