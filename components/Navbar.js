@@ -29,7 +29,7 @@ export default function Navbar() {
                     </div>
                     <div className="flex items-center">
                         <a href="/absent" className="flex items-center">
-                            <span className="text-white hover:text-orange-500 font-bold">我要請假</span>
+                            <span className="text-white hover:text-orange-500 font-bold">議員請假</span>
                         </a>
                     </div>
                     <div className="flex items-center">
@@ -49,7 +49,7 @@ export default function Navbar() {
                                 <FontAwesomeIcon icon={faCaretDown} className="ml-2 w-4 h-4 text-white group-hover:text-orange-500"/>
                             </div>
                             <div className="absolute hidden group-hover:block top-full right-0 w-48 bg-gray-700 shadow-lg rounded-lg">
-                                <a href="/faq" className="block px-4 py-2 text-white hover:bg-gray-600">學生議會搞甚麼?</a>
+                                <a href="/faq" className="block px-4 py-2 text-white hover:bg-gray-600">學生議會工作內容</a>
                                 <a href="/members" className="block px-4 py-2 text-white hover:bg-gray-600">議員成員</a>
                                 <a href="/join" className="block px-4 py-2 text-white hover:bg-gray-600">加入我們</a>
                             </div>
