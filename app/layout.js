@@ -3,6 +3,7 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import WebFooter from '@/components/WebFooter'
 import Absent from '@/components/Absent'
+import ChatBot from "@/components/ChatBot"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
