@@ -65,6 +65,7 @@ export default function RootLayout({ children }) {
         <Absent />
         <Navbar />
         {children}
+        <ChatBot />
         <WebFooter />
       </body>
     </html>
